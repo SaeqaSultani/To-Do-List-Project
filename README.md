@@ -11,7 +11,7 @@ learn how to use proper ES6 syntax,use ES6 modules to write modular JavaScript a
 # Live Demo :)
 
 
-[Live Demo Link](https://saeqasultani.github.io/webpack/)
+[Live Demo Link](https://saeqasultani.github.io/To-Do-List-Project/)
 
 # Authors
 
@@ -26,7 +26,7 @@ LinkedIn: [SaeqaSultani](https://www.linkedin.com/in/saeqa-sultani-b41493187/)
 # 🤝 Contributing
 Contributions, issues, and feature requests are welcome!
 
-Feel free to check the [issues page](https://github.com/SaeqaSultani/webpack/issues).
+Feel free to check the [issues page](https://github.com/SaeqaSultani/To-Do-List-Project/issues).
 
 # Show your support
 Give a ⭐️ if you like this project!
@@ -36,4 +36,4 @@ Give a ⭐️ if you like this project!
 - Inspiration
 - etc
 # 📝 License
-This project is [MIT](https://github.com/SaeqaSultani/webpack/blob/main/MIT.md) licensed.
+This project is [MIT](https://github.com/SaeqaSultani/To-Do-List-Project/blob/to-do-list-structure/MIT.md) licensed.
