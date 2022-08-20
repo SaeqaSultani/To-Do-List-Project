@@ -1,16 +1,13 @@
 import taskUi from './dataUi.js';
 import getdata from './getData.js';
 
-const arrtask = [];
-
 const setData = (task) => {
+  const arrTask = getdata();
+  arrTask.push(task);
 
+  localStorage.setItem('tasks', JSON.stringify(arrTask));
 
-  arrtask.push(task);
-
-  localStorage.setItem('tasks', JSON.stringify(arrtask));
-
- taskUi(task);
+  taskUi(task);
 };
 
-export{setData,arrtask} ;
+export default setData;

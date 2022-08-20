@@ -30,7 +30,7 @@ body {
   height: 20px;
 }
 
-.edit{
+.edit {
   width: 20px;
   height: 20px;
 }
@@ -55,7 +55,7 @@ body {
   flex-direction: column;
 }
 
-.div-item{
+.div-item {
   display: flex;
   flex-direction: row;
 }
@@ -96,7 +96,7 @@ body {
   text-decoration: none;
 }
 
-.popup{
+.popup {
   display: flex;
   flex-direction: column;
 }
