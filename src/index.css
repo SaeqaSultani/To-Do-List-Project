@@ -30,6 +30,16 @@ body {
   height: 20px;
 }
 
+.edit{
+  width: 20px;
+  height: 20px;
+}
+
+.remove {
+  width: 20px;
+  height: 20px;
+}
+
 .input {
   text-indent: 20px;
   font-family: "Poppins", sans-serif;
@@ -43,6 +53,11 @@ body {
 .TODO-List {
   display: flex;
   flex-direction: column;
+}
+
+.div-item{
+  display: flex;
+  flex-direction: row;
 }
 
 .items {
@@ -79,4 +94,9 @@ body {
 .clear a {
   color: #000;
   text-decoration: none;
+}
+
+.popup{
+  display: flex;
+  flex-direction: column;
 }

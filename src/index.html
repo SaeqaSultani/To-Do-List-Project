@@ -10,12 +10,14 @@
     <div class="container">
         <div class="row">
             <h1>Today's  To Do</h1>
-            <img class="icon" src="./images/reload.png" alt="reload">
+            <img id="reload" class="icon" src="./images/reload.png" alt="reload">
         </div>
         <hr>
         <div class="row">
-            <input class="input" type="text" name="title" id="title" placeholder = "Add to your list...">
-            <img class="icon" src="./images/plus.png" alt="reload">
+            <form class="form" method="post">
+                <input class="input" type="text" name="title" id="task" placeholder = "Add to your list...">
+                <img id="plus" class="icon" src="./images/plus.png" alt="plus">
+            </form>
         </div>
         <hr>
         <div class="TODO-List" id="TODO-List">
@@ -27,3 +29,6 @@
     </div>
 </body>
 </html>
+
+
+
