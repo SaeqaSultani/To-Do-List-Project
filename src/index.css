@@ -1,0 +1,82 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  margin-top: 100px;
+  width: 500px;
+  background-color: beige;
+  border: 1px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.row h1 {
+  font-size: 18px;
+  font-weight: bold;
+  font-family: Poppins, sans-serif;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+.input {
+  text-indent: 20px;
+  font-family: "Poppins", sans-serif;
+  background-color: beige;
+  border: 0;
+  outline: 0;
+  font-size: 18px;
+  width: 400px;
+}
+
+.TODO-List {
+  display: flex;
+  flex-direction: column;
+}
+
+.items {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.elements {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.elements h2 {
+  font-size: 16px;
+  font-weight: bold;
+  font-family: Poppins, sans-serif;
+  margin-left: 15px;
+}
+
+.clear {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: aliceblue;
+  margin-top: -8px;
+  padding: 10px;
+}
+
+.clear a {
+  color: #000;
+  text-decoration: none;
+}
