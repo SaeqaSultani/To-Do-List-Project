@@ -15,7 +15,7 @@ const taskUi = (task) => {
                               <div class="items">
                                   <div class="elements">
                                       <input class="checkBox" type="checkbox"  id="checkBox" name="vehicle1" value="${task.completed ? 'checked' : ''}">
-                                      <p>${task.description}</p>
+                                      <p class="text">${task.description}</p>
                                   </div>
                                   <div class="popup">
                                       <img class="edit" id="${task.index}" src="${edit}" alt="reload">

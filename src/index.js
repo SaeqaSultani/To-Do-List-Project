@@ -4,9 +4,13 @@ import taskUi from './module/dataUi.js';
 import setData from './module/setdata.js';
 
 const add = document.getElementById('plus');
-// const toDoList = document.getElementById('TODO-List');
+const clearAll = document.getElementById('clear');
 const title = document.getElementById('task');
-// const checkBox = document.getElementById('checkBox');
+const items = document.getElementsByClassName('items');
+const text = document.getElementsByClassName('text');
+const form = document.getElementsByClassName('.form');
+const reload = document.getElementById('reload');
+
 
 // arrToDoList.sort((a, b) => a.index - b.index);
 
@@ -31,6 +35,7 @@ add.addEventListener('click', (e) => {
     title.value = '';
   }
 });
+
 
 const deletTasksFromLocalSorage = (index) => {
   const data = getdata();
@@ -87,3 +92,61 @@ const manageEdit = (item) => {
   EditTasksFromArray(item.target);
 };
 document.getElementById('TODO-List').addEventListener('click', manageEdit);
+
+
+let count = 1;
+const check = (target) => {
+  target.classList.toggle('changeBg');
+  const tasks = getdata();
+  const empty = [];
+  const hammasi = document.querySelectorAll('.checkBox');
+  for (let i = 0; i < tasks.length; i += 1){
+    if (hammasi[i].classList.contains('changeBg')) {
+      tasks[i].completed = true;
+      // target.text.style = "in-linght"
+          count += 1; 
+    }else{
+      tasks[i].completed = false;
+    }
+
+      empty.push(tasks[i]);
+      localStorage.setItem('tasks', JSON.stringify(empty));
+  }
+  
+};
+
+const CheckManage = (item) => {
+  check(item.target);
+};
+document.getElementById('TODO-List').addEventListener('click', CheckManage);
+
+const clean = (index) => {
+  const data = getdata();
+  const deleteTask = data.filter((item) => item.completed === false);
+  deleteTask.forEach((toDo, index) => {
+    toDo.index = index + 1;
+  });
+  localStorage.setItem('tasks', JSON.stringify(deleteTask));
+};
+
+ clearAll.addEventListener('click',(e) =>{
+  const data = getdata();
+  for (let i = 0; i < data.length; i += 1) {
+    if(data[i].completed === true){
+      clean(e.target.parentNode.parentNode.parentNode.firstElementChild.nextElementSibling.
+        nextElementSibling.nextElementSibling.nextElementSibling.firstElementChild.firstElementChild.
+        firstElementChild.firstElementChild.innerHTML);
+         e.target.parentNode.parentNode.parentNode.firstElementChild.nextElementSibling.
+         nextElementSibling.nextElementSibling.nextElementSibling.firstElementChild.remove();
+    }
+  }
+ 
+  
+    // console.log(e.target.parentNode.parentNode.parentNode.firstElementChild.nextElementSibling.
+    //   nextElementSibling.nextElementSibling.nextElementSibling.firstElementChild.firstElementChild.
+    //   firstElementChild.firstElementChild.nodeName);
+ })
+
+ reload.addEventListener('click',() =>{
+  window.location.reload();
+ })
