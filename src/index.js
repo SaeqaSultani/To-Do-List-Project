@@ -3,7 +3,7 @@ import Sortable from 'sortablejs';
 import getdata from './module/getData.js';
 import taskUi from './module/dataUi.js';
 import setData from './module/setdata.js';
-import Tasks from './module/classData';
+import Tasks from './module/classData.js';
 
 const add = document.getElementById('plus');
 const clearAll = document.getElementById('clear');
@@ -34,7 +34,7 @@ add.addEventListener('click', (e) => {
   const tasks = getdata();
   const titleValue = title.value;
   if (!(titleValue === '')) {
-    const objTask = new Tasks(titleValue,false,tasks.length + 1);
+    const objTask = new Tasks(titleValue, false, tasks.length + 1);
 
     setData(objTask);
 
