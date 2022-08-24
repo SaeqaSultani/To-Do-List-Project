@@ -1,31 +1,26 @@
 import delet from '../images/delete.png';
-import edit from '../images/edit.png';
-
-const toDoList = document.getElementById('TODO-List');
 
 const taskUi = (task) => {
   const icDelete = new Image();
-  const icEdit = new Image();
   icDelete.src = delet;
-  icEdit.src = edit;
   icDelete.classList.add('remove');
-  icEdit.classList.add('edit');
+  const toDoList = document.getElementById('TODO-List');
+  const divParent = document.createElement('div');
+  divParent.classList.add('div-container');
+  divParent.setAttribute('draggable', 'true');
 
-  toDoList.innerHTML += `<div class="div">
-                              <div class="items">
+  divParent.innerHTML += `
+                            <div class="items">
                                   <div class="elements">
-                                      <input class="checkBox" type="checkbox"  id="checkBox" name="vehicle1" value="${task.completed ? 'checked' : ''}">
-                                      <p class="text">${task.description}</p>
+                                      <input type="checkbox" onclick="taskCheckbox(this)" class="check" ${task.completed ? 'checked' : ''}>
+                                      <input type="text" value="${task.description}" class="input ${task.completed ? 'completed' : ''}" onfocus="getCurrentTask(this)"  onblur="editTask(this)">
                                   </div>
-                                  <div class="popup">
-                                      <img class="edit" id="${task.index}" src="${edit}" alt="reload">
-                                        <hr>
-                                      <img class="remove" id="remove" src="${delet}" alt="reload">
-                                  </div>
-                                  </div>
-                                  <hr>
-                            </div> 
+                                  <img class="remove" src="${delet}" alt="reload">
+                            </div>
+                            <hr>
                          `;
+  toDoList.appendChild(divParent);
+  return toDoList;
 };
 
 export default taskUi;
