@@ -1,30 +1,40 @@
 import './index.css';
+import Sortable from 'sortablejs';
 import getdata from './module/getData.js';
 import taskUi from './module/dataUi.js';
 import setData from './module/setdata.js';
+import Tasks from './module/classData.js';
 
 const add = document.getElementById('plus');
-// const toDoList = document.getElementById('TODO-List');
+const clearAll = document.getElementById('clear');
 const title = document.getElementById('task');
-// const checkBox = document.getElementById('checkBox');
+const reload = document.getElementById('reload');
+const toDoList = document.querySelectorAll('.TODO-List');
 
-// arrToDoList.sort((a, b) => a.index - b.index);
+let currentText = null;
 
 const tasks = getdata();
 tasks.forEach((e) => {
   taskUi(e);
 });
 
+// function reload list
+reload.addEventListener('click', () => {
+  const data = getdata();
+  data.forEach((task) => {
+    task.completed = false;
+  });
+  localStorage.setItem('tasks', JSON.stringify(data));
+  window.location.reload();
+});
+
+// function add task to list
 add.addEventListener('click', (e) => {
   e.preventDefault();
   const tasks = getdata();
   const titleValue = title.value;
   if (!(titleValue === '')) {
-    const objTask = {
-      description: titleValue,
-      completed: false,
-      index: tasks.length + 1,
-    };
+    const objTask = new Tasks(titleValue, false, tasks.length + 1);
 
     setData(objTask);
 
@@ -32,23 +42,65 @@ add.addEventListener('click', (e) => {
   }
 });
 
-const deletTasksFromLocalSorage = (index) => {
+// function get current value from input
+window.getCurrentTask = (event) => {
+  currentText = event.value;
+};
+
+// function edit task of list
+window.editTask = (event) => {
   const data = getdata();
-  const deleteTask = data.filter((item) => item.description !== index);
-  deleteTask.forEach((toDo, index) => {
-    toDo.index = index + 1;
+  // check if task is empty
+  if (event.value === '') {
+    event.value = currentText;
+    return;
+  }
+  // task already exist
+  data.forEach((task) => {
+    if (task.description === event.value) {
+      event.value = currentText;
+    }
+  });
+  // update task
+  data.forEach((task) => {
+    if (task.description === currentText) {
+      task.description = event.value;
+    }
+  });
+  // // update local storage
+  localStorage.setItem('tasks', JSON.stringify(data));
+};
+
+// function checkbox
+window.taskCheckbox = (event) => {
+  const data = getdata();
+  data.forEach((task) => {
+    if (task.description === event.nextElementSibling.value) {
+      task.completed = !task.completed;
+    }
+  });
+  event.nextElementSibling.classList.toggle('completed');
+  localStorage.setItem('tasks', JSON.stringify(data));
+};
+
+// function remove task from list
+const deletTasksFromLocalSorage = (event) => {
+  const data = getdata();
+  const deleteTask = data.filter((item) => item.description !== event);
+  deleteTask.forEach((task, index) => {
+    task.index = index + 1;
   });
   localStorage.setItem('tasks', JSON.stringify(deleteTask));
 };
 
 const deleteTasksFromArray = (target) => {
   if (target.classList.contains('remove')) {
-    deletTasksFromLocalSorage(target.parentNode.parentNode.firstElementChild
-      .lastElementChild.innerHTML);
-    target.parentNode.parentNode.parentNode.remove();
+    deletTasksFromLocalSorage(target.parentNode.firstElementChild
+      .lastElementChild.value);
+    target.parentNode.parentNode.remove();
 
     // console.log(target.parentNode.parentNode.firstElementChild
-    //   .firstElementChild.nodeName);
+    //   .lastElementChild.nodeName);
   }
 };
 const manageRemove = (item) => {
@@ -56,34 +108,24 @@ const manageRemove = (item) => {
 };
 document.getElementById('TODO-List').addEventListener('click', manageRemove);
 
-const EditTasksFromArray = (target) => {
-  // const tasks = getdata();
-  if (target.classList.contains('edit')) {
-    // console.log(tasks[target.parentNode.firstElementChild.id].description);
+// clearAll tasks
+clearAll.addEventListener('click', () => {
+  const data = getdata();
+  const deleteAll = data.filter((item) => item.completed === false);
+  deleteAll.forEach((task, index) => {
+    task.index = index + 1;
+  });
+  localStorage.setItem('tasks', JSON.stringify(deleteAll));
+  window.location.reload();
+});
 
-    // const editValue = title.value;
+// drag and drop function
 
-    title.value = target.parentNode.parentNode.firstElementChild
-      .lastElementChild.innerHTML;
-
-    deletTasksFromLocalSorage(target.parentNode.parentNode.firstElementChild
-      .lastElementChild.innerHTML);
-    target.parentNode.parentNode.parentNode.remove();
-
-    // tasks[target.parentNode.firstElementChild.id].description = title.value.trim();
-
-    // localStorage.setItem('tasks',JSON.stringify(tasks));
-    // window.location.reload();
-
-    // console.log(target.parentNode.parentNode.firstElementChild
-    //   .lastElementChild.innerHTML);
-    // deletTasksFromLocalSorage(target.parentNode.parentNode.firstElementChild
-    //   .lastElementChild.innerHTML);
-    // target.parentNode.parentNode.parentNode.remove();
-  }
-};
-
-const manageEdit = (item) => {
-  EditTasksFromArray(item.target);
-};
-document.getElementById('TODO-List').addEventListener('click', manageEdit);
+toDoList.forEach((item) => {
+  const sort = new Sortable(item, {
+    group: 'shared',
+    animation: 150,
+    ghostClass: 'blue-background-class',
+  });
+  sort.init();
+});

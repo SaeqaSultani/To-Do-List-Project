@@ -30,14 +30,10 @@ body {
   height: 20px;
 }
 
-.edit {
-  width: 20px;
-  height: 20px;
-}
-
 .remove {
   width: 20px;
   height: 20px;
+  padding: 10px;
 }
 
 .input {
@@ -96,7 +92,15 @@ body {
   text-decoration: none;
 }
 
-.popup {
-  display: flex;
-  flex-direction: column;
+.completed {
+  color: rgb(167, 166, 166);
+  text-decoration: line-through;
+}
+
+.hide {
+  display: none;
+}
+
+.drag-over {
+  border: dashed 3px red;
 }
