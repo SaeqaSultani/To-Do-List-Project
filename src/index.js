@@ -13,14 +13,16 @@ const toDoList = document.querySelectorAll('.TODO-List');
 
 let currentText = null;
 
-const tasks = getdata();
-tasks.forEach((e) => {
+const data = getdata();
+
+
+data.forEach((e) => {
   taskUi(e);
 });
 
 // function reload list
 reload.addEventListener('click', () => {
-  const data = getdata();
+  
   data.forEach((task) => {
     task.completed = false;
   });
@@ -31,10 +33,10 @@ reload.addEventListener('click', () => {
 // function add task to list
 add.addEventListener('click', (e) => {
   e.preventDefault();
-  const tasks = getdata();
+  
   const titleValue = title.value;
   if (!(titleValue === '')) {
-    const objTask = new Tasks(titleValue, false, tasks.length + 1);
+    const objTask = new Tasks(titleValue, false, data.length + 1);
 
     setData(objTask);
 
@@ -49,7 +51,7 @@ window.getCurrentTask = (event) => {
 
 // function edit task of list
 window.editTask = (event) => {
-  const data = getdata();
+  
   // check if task is empty
   if (event.value === '') {
     event.value = currentText;
@@ -73,7 +75,7 @@ window.editTask = (event) => {
 
 // function checkbox
 window.taskCheckbox = (event) => {
-  const data = getdata();
+  
   data.forEach((task) => {
     if (task.description === event.nextElementSibling.value) {
       task.completed = !task.completed;
@@ -85,7 +87,7 @@ window.taskCheckbox = (event) => {
 
 // function remove task from list
 const deletTasksFromLocalSorage = (event) => {
-  const data = getdata();
+ 
   const deleteTask = data.filter((item) => item.description !== event);
   deleteTask.forEach((task, index) => {
     task.index = index + 1;
@@ -99,8 +101,6 @@ const deleteTasksFromArray = (target) => {
       .lastElementChild.value);
     target.parentNode.parentNode.remove();
 
-    // console.log(target.parentNode.parentNode.firstElementChild
-    //   .lastElementChild.nodeName);
   }
 };
 const manageRemove = (item) => {
@@ -110,7 +110,7 @@ document.getElementById('TODO-List').addEventListener('click', manageRemove);
 
 // clearAll tasks
 clearAll.addEventListener('click', () => {
-  const data = getdata();
+
   const deleteAll = data.filter((item) => item.completed === false);
   deleteAll.forEach((task, index) => {
     task.index = index + 1;

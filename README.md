@@ -11,7 +11,7 @@ learn how to use proper ES6 syntax,use ES6 modules to write modular JavaScript a
 # Live Demo :)
 
 
-[Live Demo Link](https://saeqasultani.github.io/To-Do-List-Project/)
+[Live Demo Link](https://github.com/SaeqaSultani/To-Do-List-Project)
 
 # Authors
 
