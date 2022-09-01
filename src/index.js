@@ -31,6 +31,7 @@ reload.addEventListener('click', () => {
 // function add task to list
 add.addEventListener('click', (e) => {
   e.preventDefault();
+
   const titleValue = title.value;
   addData(titleValue);
   title.value = '';
