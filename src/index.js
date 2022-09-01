@@ -15,14 +15,12 @@ let currentText = null;
 
 const data = getdata();
 
-
 data.forEach((e) => {
   taskUi(e);
 });
 
 // function reload list
 reload.addEventListener('click', () => {
-  
   data.forEach((task) => {
     task.completed = false;
   });
@@ -33,7 +31,7 @@ reload.addEventListener('click', () => {
 // function add task to list
 add.addEventListener('click', (e) => {
   e.preventDefault();
-  
+
   const titleValue = title.value;
   if (!(titleValue === '')) {
     const objTask = new Tasks(titleValue, false, data.length + 1);
@@ -51,7 +49,6 @@ window.getCurrentTask = (event) => {
 
 // function edit task of list
 window.editTask = (event) => {
-  
   // check if task is empty
   if (event.value === '') {
     event.value = currentText;
@@ -75,7 +72,6 @@ window.editTask = (event) => {
 
 // function checkbox
 window.taskCheckbox = (event) => {
-  
   data.forEach((task) => {
     if (task.description === event.nextElementSibling.value) {
       task.completed = !task.completed;
@@ -87,7 +83,6 @@ window.taskCheckbox = (event) => {
 
 // function remove task from list
 const deletTasksFromLocalSorage = (event) => {
- 
   const deleteTask = data.filter((item) => item.description !== event);
   deleteTask.forEach((task, index) => {
     task.index = index + 1;
@@ -100,7 +95,6 @@ const deleteTasksFromArray = (target) => {
     deletTasksFromLocalSorage(target.parentNode.firstElementChild
       .lastElementChild.value);
     target.parentNode.parentNode.remove();
-
   }
 };
 const manageRemove = (item) => {
@@ -110,7 +104,6 @@ document.getElementById('TODO-List').addEventListener('click', manageRemove);
 
 // clearAll tasks
 clearAll.addEventListener('click', () => {
-
   const deleteAll = data.filter((item) => item.completed === false);
   deleteAll.forEach((task, index) => {
     task.index = index + 1;
