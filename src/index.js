@@ -31,6 +31,7 @@ reload.addEventListener('click', () => {
 // function add task to list
 add.addEventListener('click', (e) => {
   e.preventDefault();
+
   const titleValue = title.value;
   addData(titleValue);
   title.value = '';
@@ -76,6 +77,14 @@ window.taskCheckbox = (event) => {
 };
 
 // function remove task from list
+const deletTasksFromLocalSorage = (event) => {
+  const deleteTask = data.filter((item) => item.description !== event);
+  deleteTask.forEach((task, index) => {
+    task.index = index + 1;
+  });
+  localStorage.setItem('tasks', JSON.stringify(deleteTask));
+};
+
 const deleteTasksFromArray = (target) => {
   if (target.classList.contains('remove')) {
     deletTasksFromLocalSorage(target.parentNode.firstElementChild
