@@ -3,7 +3,7 @@ import addData from '../module/addData.js';
 import deletTasksFromLocalSorage from '../module/deleteData.js';
 import getdata from '../module/getData.js';
 
-describe('AddData', () => {
+describe('Test methods', () => {
   test('should add data to the list', () => {
     addData('hi');
 
