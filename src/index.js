@@ -1,5 +1,4 @@
 import './index.css';
-import Sortable from 'sortablejs';
 import getdata from './module/getData.js';
 import taskUi from './module/dataUi.js';
 import addData from './module/addData.js';
@@ -9,7 +8,6 @@ const add = document.getElementById('plus');
 const clearAll = document.getElementById('clear');
 const title = document.getElementById('task');
 const reload = document.getElementById('reload');
-const toDoList = document.querySelectorAll('.TODO-List');
 
 let currentText = null;
 
@@ -97,15 +95,4 @@ clearAll.addEventListener('click', () => {
   });
   localStorage.setItem('tasks', JSON.stringify(deleteAll));
   window.location.reload();
-});
-
-// drag and drop function
-
-toDoList.forEach((item) => {
-  const sort = new Sortable(item, {
-    group: 'shared',
-    animation: 150,
-    ghostClass: 'blue-background-class',
-  });
-  sort.init();
 });
