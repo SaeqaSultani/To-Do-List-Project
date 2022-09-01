@@ -1,4 +1,4 @@
-import taskUi from './dataUi.js';
+// import taskUi from './dataUi.js';
 import getdata from './getData.js';
 
 const setData = (task) => {
@@ -7,7 +7,7 @@ const setData = (task) => {
 
   localStorage.setItem('tasks', JSON.stringify(arrTask));
 
-  taskUi(task);
+  // taskUi(task);
 };
 
 export default setData;

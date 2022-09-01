@@ -1,15 +1,13 @@
 import './index.css';
-import Sortable from 'sortablejs';
 import getdata from './module/getData.js';
 import taskUi from './module/dataUi.js';
-import setData from './module/setdata.js';
-import Tasks from './module/classData.js';
+import addData from './module/addData.js';
+import deletTasksFromLocalSorage from './module/deleteData.js';
 
 const add = document.getElementById('plus');
 const clearAll = document.getElementById('clear');
 const title = document.getElementById('task');
 const reload = document.getElementById('reload');
-const toDoList = document.querySelectorAll('.TODO-List');
 
 let currentText = null;
 
@@ -33,13 +31,8 @@ add.addEventListener('click', (e) => {
   e.preventDefault();
 
   const titleValue = title.value;
-  if (!(titleValue === '')) {
-    const objTask = new Tasks(titleValue, false, data.length + 1);
-
-    setData(objTask);
-
-    title.value = '';
-  }
+  addData(titleValue);
+  title.value = '';
 });
 
 // function get current value from input
@@ -82,14 +75,6 @@ window.taskCheckbox = (event) => {
 };
 
 // function remove task from list
-const deletTasksFromLocalSorage = (event) => {
-  const deleteTask = data.filter((item) => item.description !== event);
-  deleteTask.forEach((task, index) => {
-    task.index = index + 1;
-  });
-  localStorage.setItem('tasks', JSON.stringify(deleteTask));
-};
-
 const deleteTasksFromArray = (target) => {
   if (target.classList.contains('remove')) {
     deletTasksFromLocalSorage(target.parentNode.firstElementChild
@@ -110,15 +95,4 @@ clearAll.addEventListener('click', () => {
   });
   localStorage.setItem('tasks', JSON.stringify(deleteAll));
   window.location.reload();
-});
-
-// drag and drop function
-
-toDoList.forEach((item) => {
-  const sort = new Sortable(item, {
-    group: 'shared',
-    animation: 150,
-    ghostClass: 'blue-background-class',
-  });
-  sort.init();
 });
