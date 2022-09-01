@@ -2,8 +2,8 @@ import './index.css';
 import Sortable from 'sortablejs';
 import getdata from './module/getData.js';
 import taskUi from './module/dataUi.js';
-import setData from './module/setdata.js';
-import Tasks from './module/classData.js';
+import addData from './module/addData.js';
+import deletTasksFromLocalSorage from './module/deleteData.js';
 
 const add = document.getElementById('plus');
 const clearAll = document.getElementById('clear');
@@ -15,14 +15,12 @@ let currentText = null;
 
 const data = getdata();
 
-
 data.forEach((e) => {
   taskUi(e);
 });
 
 // function reload list
 reload.addEventListener('click', () => {
-  
   data.forEach((task) => {
     task.completed = false;
   });
@@ -33,15 +31,9 @@ reload.addEventListener('click', () => {
 // function add task to list
 add.addEventListener('click', (e) => {
   e.preventDefault();
-  
   const titleValue = title.value;
-  if (!(titleValue === '')) {
-    const objTask = new Tasks(titleValue, false, data.length + 1);
-
-    setData(objTask);
-
-    title.value = '';
-  }
+  addData(titleValue);
+  title.value = '';
 });
 
 // function get current value from input
@@ -51,7 +43,6 @@ window.getCurrentTask = (event) => {
 
 // function edit task of list
 window.editTask = (event) => {
-  
   // check if task is empty
   if (event.value === '') {
     event.value = currentText;
@@ -75,7 +66,6 @@ window.editTask = (event) => {
 
 // function checkbox
 window.taskCheckbox = (event) => {
-  
   data.forEach((task) => {
     if (task.description === event.nextElementSibling.value) {
       task.completed = !task.completed;
@@ -86,21 +76,11 @@ window.taskCheckbox = (event) => {
 };
 
 // function remove task from list
-const deletTasksFromLocalSorage = (event) => {
- 
-  const deleteTask = data.filter((item) => item.description !== event);
-  deleteTask.forEach((task, index) => {
-    task.index = index + 1;
-  });
-  localStorage.setItem('tasks', JSON.stringify(deleteTask));
-};
-
 const deleteTasksFromArray = (target) => {
   if (target.classList.contains('remove')) {
     deletTasksFromLocalSorage(target.parentNode.firstElementChild
       .lastElementChild.value);
     target.parentNode.parentNode.remove();
-
   }
 };
 const manageRemove = (item) => {
@@ -110,7 +90,6 @@ document.getElementById('TODO-List').addEventListener('click', manageRemove);
 
 // clearAll tasks
 clearAll.addEventListener('click', () => {
-
   const deleteAll = data.filter((item) => item.completed === false);
   deleteAll.forEach((task, index) => {
     task.index = index + 1;
