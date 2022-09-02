@@ -15,9 +15,9 @@ describe('Test methods', () => {
 
   test('should edit data from the list', () => {
     testCurrentValue('the');
-    testEditValue('hi');
+    testEditValue('is');
     const data = getdata();
-    expect(data[0].description).toBe('hi');
+    expect(data[0].description).toBe('is');
   });
 
   test('should check the checkbox of data from the list', () => {
