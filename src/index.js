@@ -3,13 +3,14 @@ import getdata from './module/getData.js';
 import taskUi from './module/dataUi.js';
 import addData from './module/addData.js';
 import deletTasksFromLocalSorage from './module/deleteData.js';
+import { currentValue, editValue } from './module/editData.js';
+import checkBoxValue from './module/checkData.js';
+import clearAllData from './module/clearAllData.js';
 
 const add = document.getElementById('plus');
 const clearAll = document.getElementById('clear');
 const title = document.getElementById('task');
 const reload = document.getElementById('reload');
-
-let currentText = null;
 
 const data = getdata();
 
@@ -37,41 +38,17 @@ add.addEventListener('click', (e) => {
 
 // function get current value from input
 window.getCurrentTask = (event) => {
-  currentText = event.value;
+  currentValue(event);
 };
 
 // function edit task of list
 window.editTask = (event) => {
-  // check if task is empty
-  if (event.value === '') {
-    event.value = currentText;
-    return;
-  }
-  // task already exist
-  data.forEach((task) => {
-    if (task.description === event.value) {
-      event.value = currentText;
-    }
-  });
-  // update task
-  data.forEach((task) => {
-    if (task.description === currentText) {
-      task.description = event.value;
-    }
-  });
-  // // update local storage
-  localStorage.setItem('tasks', JSON.stringify(data));
+  editValue(event);
 };
 
 // function checkbox
 window.taskCheckbox = (event) => {
-  data.forEach((task) => {
-    if (task.description === event.nextElementSibling.value) {
-      task.completed = !task.completed;
-    }
-  });
-  event.nextElementSibling.classList.toggle('completed');
-  localStorage.setItem('tasks', JSON.stringify(data));
+  checkBoxValue(event);
 };
 
 // function remove task from list
@@ -89,10 +66,6 @@ document.getElementById('TODO-List').addEventListener('click', manageRemove);
 
 // clearAll tasks
 clearAll.addEventListener('click', () => {
-  const deleteAll = data.filter((item) => item.completed === false);
-  deleteAll.forEach((task, index) => {
-    task.index = index + 1;
-  });
-  localStorage.setItem('tasks', JSON.stringify(deleteAll));
+  clearAllData();
   window.location.reload();
 });
