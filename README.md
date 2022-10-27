@@ -1,7 +1,10 @@
-# webpack
+# TO Do List
 
 this is a webpack project that the purpose of this project is to understand how use webpack to bundle JavaScript,
 learn how to use proper ES6 syntax,use ES6 modules to write modular JavaScript and build a simple HTML list of To Do tasks.
+
+![todo](https://user-images.githubusercontent.com/74806645/198382078-fbc62a49-ff50-4e41-a6bf-564a23086237.png)
+
 # Built With
 - Major languages
 - Frameworks
