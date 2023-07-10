@@ -10,9 +10,7 @@ learn how to use proper ES6 syntax,use ES6 modules to write modular JavaScript a
 - Frameworks
 - Technologies used
 
-
 # Live Demo :)
-
 
 [Live Demo Link](https://saeqasultani.github.io/To-Do-List-Project/)
 
