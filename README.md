@@ -1,5 +1,4 @@
 # TO Do List
-
 this is a webpack project that the purpose of this project is to understand how use webpack to bundle JavaScript,
 learn how to use proper ES6 syntax,use ES6 modules to write modular JavaScript and build a simple HTML list of To Do tasks.
 
