@@ -15,7 +15,6 @@ learn how to use proper ES6 syntax,use ES6 modules to write modular JavaScript a
 
 # Authors
 👤 Saeqa Sultani
-
 GitHub: [SaeqaSultani](https://github.com/SaeqaSultani)
 
 Twitter: [SaeqaSultani](https://twitter.com/SaeqaSultani)
